@@ -1,0 +1,47 @@
+﻿@using Identity.ViewModel;
+@model List<UsersVM>
+
+@{
+    ViewData["Title"] = "Users";
+}
+
+@if (!Model.Any())
+{
+    <h1>No Users</h1>
+}
+else
+{
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">FullName</th>
+            <th scope="col">UserName</th>
+            <th scope="col">Email</th>
+            <th scope="col">PhoneNumber</th>
+            <th scope="col">Links</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var user in Model)
+        {
+            <tr>
+                <th scope="row">@user.Id</th>
+                <td>@user.FullName</td>
+                <td>@user.UserName</td>
+                <td>@user.Email</td>
+                <td>@user.Phone</td>
+                <td>
+                    <form asp-controller="UserManage" asp-action="RemoveUser" asp-route-Id="@user.Id" method="post">
+
+                        <a asp-controller="UserManage" asp-action="EditUser" asp-route-Id="@user.Id"
+                           class="btn btn-primary">Edit </a>
+
+                        <button type="submit" class="btn btn-danger">Delete user</button>
+                    </form>
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+}

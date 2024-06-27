@@ -1,0 +1,52 @@
+﻿@using Identity.ViewModel
+@model EditUserVM
+@{
+    ViewData["Title"] = "Edit User";
+}
+
+<h1>EditUser</h1>
+
+<form asp-controller="UserManage" asp-action="EditUser" method="post">
+    <div asp-validation-summary="ModelOnly"></div>
+    <div class="form-group">
+        <label class="control-label" asp-for="FirstName"></label>
+        <input class="form-control" asp-for="FirstName" />
+    </div>
+
+    <div class="form-group">
+        <label class="control-label" asp-for="LastName"></label>
+        <input class="form-control" asp-for="LastName" />
+    </div>
+
+    <div class="form-group">
+        <label class="control-label" asp-for="UserName"></label>
+        <input class="form-control" asp-for="UserName" />
+    </div>
+
+    <div class="form-group">
+        <label class="control-label" asp-for="Email"></label>
+        <input class="form-control" asp-for="Email" />
+    </div>
+
+    <div class="form-group">
+        <label class="control-label" asp-for="Phone"></label>
+        <input class="form-control" asp-for="Phone" />
+    </div>
+    @{
+        var Roles = ViewBag.Roles as List<RoleVM>;
+        var UserRoles = ViewBag.UserRoles as List<string>;
+    }
+    <div class="form-group">
+        @foreach (var role in Roles)
+        {
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" @((UserRoles.Contains(role.Name)) ? "checked" : "") name="SelectedRoles" value="@role.Name">
+                <label class="form-check-label">@role.Name</label>
+            </div>
+        }
+    </div>
+
+    <input type="hidden" asp-for="Id" />
+
+    <button class="btn btn-primary" type="submit">Submit</button>
+</form>

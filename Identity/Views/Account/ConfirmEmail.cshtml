@@ -1,0 +1,20 @@
+﻿@{
+    ViewData["Title"] = "Confirm Email";
+}
+<div class="text-center">
+    @if (ViewBag.ISConfirm)
+    {
+        <div class="alert alert-success">
+            حساب کاربری شما تایید شد با استفاده از لینک زیر وارد حساب خود شوید.
+        </div>
+        <p>
+            <a asp-action="Login" asp-controller="Account">Login</a>
+        </p>
+    }
+    else
+    {
+        <div class="alert alert-danger">
+            حساب کاربری شما تایید نشد.
+        </div>
+    }
+</div>
